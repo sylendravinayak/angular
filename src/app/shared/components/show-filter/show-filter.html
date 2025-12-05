@@ -1,0 +1,53 @@
+<div 
+  [formGroup]="filterForm" 
+  class="w-full bg-white border-b border-gray-300 py-3 flex justify-between"
+>
+
+  <!-- DATE PICKER -->
+  <div class="flex items-center pl-20">
+    <div class="flex items-center gap-4">
+      @for (date of next7Days; track date) {
+        <div
+          (click)="selectDate(date)"
+          class="cursor-pointer text-center px-3 py-2 rounded-xl transition-all"
+          [ngClass]="{
+            'bg-pink-600 text-white': DateString(selectedDate) === date.toDateString(),
+            'text-gray-700 hover:bg-gray-100': DateString(selectedDate) !== date.toDateString()
+          }"
+        >
+          <div class="text-xs font-semibold">{{ date | date:'EEE' }}</div>
+          <div class="text-lg font-bold">{{ date | date:'dd' }}</div>
+          <div class="text-[10px] font-medium">{{ date | date:'MMM' }}</div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- DROPDOWNS -->
+  <div class="flex">
+
+    <!-- Language -->
+    <div class="relative pr-6">
+      <select 
+        formControlName="language"
+        class="appearance-none bg-transparent text-gray-800 font-medium px-1 py-2 text-xl"
+      >
+        <option value="">Language</option>
+        <option *ngFor="let l of languageOptions" [value]="l">{{ l }}</option>
+      </select>
+    </div>
+
+    <!-- Format -->
+    <div class="relative pr-6">
+      <select 
+        formControlName="format"
+        class="appearance-none bg-transparent text-gray-800 font-medium px-1 py-2 text-xl"
+      >
+        <option value="">Format</option>
+        <option *ngFor="let f of formatOptions" [value]="f">{{ f }}</option>
+      </select>
+    </div>
+
+  </div>
+
+</div>

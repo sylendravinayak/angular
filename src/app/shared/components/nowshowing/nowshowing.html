@@ -1,0 +1,8 @@
+<ng-container *ngIf="movies?.length; else empty">
+  <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-30">
+    <app-card *ngFor="let m of movies" [movie]="m"></app-card>
+  </div>
+</ng-container>
+<ng-template #empty>
+  <p class="text-gray-500">No movies match your filters.</p>
+</ng-template>

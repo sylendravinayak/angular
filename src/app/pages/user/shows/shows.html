@@ -1,0 +1,44 @@
+<div class="min-h-screen w-full">
+
+  <app-movie-details [movie$]="current_movie$  "></app-movie-details>
+
+  <app-show-filter (filtersChanged)="onFiltersChanged($event)"></app-show-filter>
+
+  
+  <div class="mt-10 w-full px-4">
+
+    <div 
+      *ngFor="let screen of groupedScreens | keyvalue" 
+      class="mb-8 pb-6 border-b border-gray-300"
+    >
+      
+      <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+        <span class="h-2 w-2 bg-pink-600 rounded-full"></span>
+        Screen{{ screen.key }}
+      </h2>
+
+      <div class="flex flex-wrap gap-4">
+
+        <button
+          *ngFor="let show of screen.value"
+          class="
+            px-5 py-2.5 rounded-xl text-sm font-medium 
+            border border-gray-400 
+            bg-white 
+            shadow-sm 
+            hover:shadow-md 
+            hover:border-pink-600 
+            hover:text-pink-600
+            transition-all duration-200
+          "
+        >
+          {{ show.show_time | time12 }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

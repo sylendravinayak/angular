@@ -1,0 +1,92 @@
+<div class="space-y-6">
+  <!-- Languages -->
+  <section class="bg-white p-4 rounded-lg shadow-sm">
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="font-semibold text-gray-800">Languages</h3>
+      <button class="text-sm text-pink-500" (click)="clearLanguages()">Clear</button>
+    </div>
+    <div>
+      <button
+        *ngFor="let l of languages"
+        (click)="toggleLanguage(l)"
+        [attr.aria-pressed]="selectedLanguages.has(l)"
+        class="px-3 py-1 rounded-full border mr-2 mb-2 text-sm"
+        [ngClass]="selectedLanguages.has(l) ? 'bg-pink-100 border-pink-300 text-pink-700' : 'bg-white border-gray-200 text-gray-700'"
+      >
+        {{ l }}
+      </button>
+    </div>
+  </section>
+
+  <!-- Genres -->
+  <section class="bg-white p-4 rounded-lg shadow-sm">
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="font-semibold text-gray-800">Genres</h3>
+      <button class="text-sm text-pink-500" (click)="clearGenres()">Clear</button>
+    </div>
+    <div>
+      <button
+        *ngFor="let g of genres"
+        (click)="toggleGenre(g)"
+        [attr.aria-pressed]="selectedGenres.has(g)"
+        class="px-3 py-1 rounded-full border mr-2 mb-2 text-sm"
+        [ngClass]="selectedGenres.has(g) ? 'bg-pink-100 border-pink-300 text-pink-700' : 'bg-white border-gray-200 text-gray-700'"
+      >
+        {{ g }}
+      </button>
+    </div>
+  </section>
+
+  <!-- Formats -->
+  <section class="bg-white p-4 rounded-lg shadow-sm">
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="font-semibold text-gray-800">Formats</h3>
+      <button class="text-sm text-pink-500" (click)="clearFormats()">Clear</button>
+    </div>
+    <div>
+      <button
+        *ngFor="let f of formats"
+        (click)="toggleFormat(f)"
+        [attr.aria-pressed]="selectedFormats.has(f)"
+        class="px-3 py-1 rounded-full border mr-2 mb-2 text-sm"
+        [ngClass]="selectedFormats.has(f) ? 'bg-pink-100 border-pink-300 text-pink-700' : 'bg-white border-gray-200 text-gray-700'"
+      >
+        {{ f }}
+      </button>
+    </div>
+  </section>
+
+  <!-- Release date from -->
+  <section class="bg-white p-4 rounded-lg shadow-sm">
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="font-semibold text-gray-800">Release Date From</h3>
+      <button class="text-sm text-pink-500" (click)="onReleaseDateChange(null)">Clear</button>
+    </div>
+    <input
+      type="date"
+      class="w-full border rounded px-3 py-2"
+      [value]="releaseDateFrom ?? ''"
+      (change)="onReleaseDateChange($any($event.target).value || null)"
+    />
+  </section>
+
+  <!-- Sort By -->
+  <section class="bg-white p-4 rounded-lg shadow-sm">
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="font-semibold text-gray-800">Sort</h3>
+      <button class="text-sm text-pink-500" (click)="onSortChange(null)">Clear</button>
+    </div>
+
+    <!-- previously: (change)="onSortChange($any($event.target).value ? JSON.parse($any($event.target).value) : null)" -->
+<select
+  class="w-full border rounded px-3 py-2"
+  (change)="onSortChange(parseSortValue($any($event.target).value))"
+>
+  <option value="">-- select --</option>
+  <option [value]="json_stringify({field:'rating',order:'desc'})">Rating: High → Low</option>
+  <option [value]="json_stringify({field:'rating',order:'asc'})">Rating: Low → High</option>
+  <option [value]="json_stringify({field:'release_date',order:'desc'})">Newest</option>
+  <option [value]="json_stringify({field:'release_date',order:'asc'})">Oldest</option>
+</select>
+  </section>
+</div>

@@ -1,0 +1,29 @@
+<div class="min-h-screen bg-gray-50 absolute">
+  <app-navbar (searchChange)="onSearch($event)"></app-navbar>
+
+  <div class="relative top-8 max-w-7xl mx-auto px-4 py-8 flex gap-8">
+    <aside class="w-72">
+      <app-filter
+        [movies]="moviesSnapshot"
+        (languagesChange)="onLanguages($event)"
+        (genresChange)="onGenres($event)"
+        (formatsChange)="onFormats($event)"
+        (releaseDateFromChange)="onReleaseDateFrom($event)"
+        (sortByChange)="onSortBy($event)"
+      ></app-filter>
+    </aside>
+
+    <main class="flex-1">
+      <h2 class="text-3xl font-extrabold text-gray-800 mb-6">Now Showing</h2>
+
+      <ng-container *ngIf="pageItems$ | async as movies; else loading">
+        <app-now-showing [movies]="movies"></app-now-showing>
+      </ng-container>
+
+      <ng-template #loading>
+        <p class="text-gray-500">Loading movies…</p>
+      </ng-template>
+
+    </main>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="500" height="120">
+  <text x="10" y="80" font-size="60" font-weight="900" 
+        font-family="Poppins, sans-serif" fill="#EB4E62" letter-spacing="2">
+    ORION
+  </text>
+  <text x="270" y="80" font-size="40" font-weight="500" 
+        font-family="Poppins, sans-serif" fill="#EB4E62" letter-spacing="2">
+    CINEMAS
+  </text>
+  
+  <!-- Star above the "I" in ORION -->
+  <polygon points="145,15 150,30 165,30 153,40 158,55 145,47 132,55 137,40 125,30 140,30" 
+           fill="#EB4E62"/>
+</svg>
