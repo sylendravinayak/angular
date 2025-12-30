@@ -1,0 +1,105 @@
+/* Dropdown styling */
+.select-dropdown {
+  appearance: none;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.625rem 2. 5rem 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 150px;
+}
+
+.select-dropdown:hover {
+  border-color: #d1d5db;
+  background-color: #f3f4f6;
+}
+
+.select-dropdown:focus {
+  outline: none;
+  border-color: #ec4899;
+  box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+}
+
+/* Show time button */
+.show-time-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 0.75rem 1rem;
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  transition: all 0. 2s ease;
+  cursor: pointer;
+}
+
+.show-time-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.show-time-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.show-time-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* Smooth animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.space-y-4 > div {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.space-y-4 > div:nth-child(1) { animation-delay: 0.05s; }
+.space-y-4 > div:nth-child(2) { animation-delay: 0.1s; }
+.space-y-4 > div:nth-child(3) { animation-delay: 0.15s; }
+.space-y-4 > div:nth-child(4) { animation-delay: 0.2s; }
+.space-y-4 > div:nth-child(5) { animation-delay: 0. 25s; }
+
+/* Hover effects for screen cards */
+.bg-white.rounded-xl:hover .show-time-btn {
+  border-color: #d1d5db;
+}
+
+/* Sticky header shadow */
+.sticky {
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0. 95);
+}
+
+/* Date picker hover effect */
+.cursor-pointer.text-center:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .show-time-btn {
+    min-width: 80px;
+    padding: 0. 625rem 0.75rem;
+  }
+  
+  .select-dropdown {
+    min-width: 120px;
+    font-size: 0.8125rem;
+  }
+}

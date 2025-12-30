@@ -1,0 +1,82 @@
+<div class="summary">
+  <div class="summary-card">
+    <div class="summary-title">Booking Summary</div>
+
+    <div class="summary-movie">
+      <div
+        class="poster-skeleton bg-contain"
+        [style.backgroundImage]="'url(' + (showSummary()?.movie_poster || '') + ')'"
+        style="background-size: cover; background-position: center; background-repeat: no-repeat;"
+      ></div>
+      <div>
+        <div class="movie-name">{{ showSummary()?.movie_title }}</div>
+        <div class="movie-meta" *ngIf="showSummary">
+          {{ showSummary()?.show_date | date:'EEE, d MMM' }}, {{ showSummary()?.show_time?? '' | time12 }}
+        </div>
+        <div class="movie-meta">{{ showSummary()?.screen_name }}</div>
+      </div>
+    </div>
+
+    <div class="summary-body">
+      <ng-container *ngIf="bookingStateService.selected().length === 0; else hasSeats">
+        <div class="summary-empty-icon">🎟️</div>
+        <div class="summary-empty-text">No Seat Selected</div>
+        <div class="summary-empty-sub">Select seats to proceed</div>
+      </ng-container>
+
+      <ng-template #hasSeats>
+        <p class="text-gray-500 text-sm pb-2">SELECTED SEATS</p>
+        <div class="summary-list border-b border-gray-300 pb-2">
+          <div class="summary-seat" *ngFor="let s of bookingStateService.selected()">
+            {{ s.seat_number || (rowLabel(s.row_number) + s.col_number) }}
+          </div>
+        </div>
+
+        <div class="price pt-2 flex flex-col gap-2">
+          <p class="text-gray-600">Tickets</p>
+          <div class="flex justify-between">
+            <span class="font-bold">Net Price( {{ bookingStateService.selected().length }} x Ticket(s) )</span>
+            <span class="font-bold">₹{{ totalPrice() | number:'1.2-2'}}</span>
+          </div>
+        </div>
+      </ng-template>
+      <!-- FOOD ITEMS SECTION -->
+<div class="price pt-4" *ngIf="cart().length > 0">
+  <p class="text-gray-600">Food Items</p>
+
+  <div class="summary-list pb-2">
+    <div class="summary-seat flex justify-between" *ngFor="let item of cart()">
+      <span>{{ item.item_name }} (x{{ item.quantity }})</span>
+      <span>₹{{ item.price * item.quantity }}</span>
+    </div>
+  </div>
+
+  <div class="flex justify-between mt-2">
+    <span>Total Food Price</span>
+    <span>₹{{ foodTotal() }}</span>
+  </div>
+  <div class="flex justify-between mt-2">
+    <span>Subtotal</span>
+    <span>₹{{ totalPrice() + foodTotal() }}</span>
+  </div>
+  <div class="flex justify-between mt-2">
+    <span class="font-bold">Subtotal</span>
+    <span>₹{{ totalPrice() + foodTotal() }}</span>
+  </div>
+</div>
+
+
+      <!-- Proceed always visible but disabled when no seats -->
+      <div class="proceed-wrap">
+        <button
+          class="primary-btn proceed-btn debug-visible"
+          type="button"
+          [disabled]="bookingStateService.selected().length === 0"
+          (click)="proceed()"
+        >
+          Proceed
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

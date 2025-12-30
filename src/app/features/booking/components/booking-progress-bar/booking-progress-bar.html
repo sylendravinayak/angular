@@ -1,0 +1,7 @@
+  <div class="steps-bar ">
+    <button class="link" aria-label="Back" >← Back</button>
+    <div class="steps">
+      <span class="step" [ngClass]="{'active': bookingStateService.currentStep() === 1}">Select Seats</span>
+      <span class="step" [ngClass]="{'active': bookingStateService.currentStep() === 2}">Grab Food</span>
+      <span class="step" [ngClass]="{'active': bookingStateService.currentStep() === 3}">Payment</span>
+    </div>

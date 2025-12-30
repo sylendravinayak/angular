@@ -1,0 +1,54 @@
+<div class="page">
+  <!-- Top nav steps -->
+  <app-booking-progress-bar></app-booking-progress-bar>
+
+  <div class="layout">
+    <!-- Seat map -->
+    <div class="seat-map-card">
+      <div class="screen-arc">SCREEN</div>
+
+      <div class="legend">
+        <div class="legend-item"><span class="dot available"></span>Available</div>
+        <div class="legend-item"><span class="dot selected"></span>Selected</div>
+        <div class="legend-item"><span class="dot pathway"></span>Pathway</div>
+      </div>
+
+      <!-- Categories -->
+      <div class="categories" *ngFor="let group of grouped">
+        <div class="category-header">
+          <div class="category-title">{{ group.category }}</div>
+          <div class="category-price" *ngIf="group.price">₹{{ group.price }} + GST</div>
+        </div>
+
+        <div class="rows">
+          <div class="row" *ngFor="let r of group.rows">
+            <div class="row-label">{{ r.rowLabel }}</div>
+
+            <div class="seats">
+              <ng-container *ngFor="let s of r.seats">
+                <!-- Pathway gap -->
+                <div *ngIf="!s.is_available" class="seat pathway-seat"></div>
+
+                <!-- Available / selected seat -->
+                <button
+                  *ngIf="s.is_available"
+                  type="button"
+                  class="seat"
+                  [class.selected]="isSelected(s)"
+                  (click)="toggleSeat(s)"
+                >
+                  {{ s.seat_number || s.col_number }}
+                </button>
+              </ng-container>
+            </div>
+
+            <div class="row-label">{{ r.rowLabel }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking summary -->
+    <app-booking-summary ></app-booking-summary>
+  </div>
+</div>

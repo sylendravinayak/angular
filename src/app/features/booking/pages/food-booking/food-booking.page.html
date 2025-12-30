@@ -1,0 +1,83 @@
+<app-booking-progress-bar></app-booking-progress-bar>
+<div class="page food-page flex md:flex-row flex-col gap-2 p-2 w-full">
+    <div class="wrap md:w-3/4">
+        <!-- Header / Search -->
+  <div class="header">
+    <h2 class="title">Grab a Bite!</h2>
+    <div class="search">
+      <input
+        type="search"
+        [formControl]="searchCtrl"
+        placeholder="Search for F&B Items"
+        class="search-input"
+        aria-label="Search food and beverages"
+      />
+      <svg viewBox="0 0 24 24" class="search-ic" aria-hidden="true">
+        <path d="M10 18a8 8 0 1 1 5.29-14.01A8 8 0 0 1 10 18zm11 3-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Category tabs -->
+  <div class="tabs">
+    <button class="tab active" (click)="setCategory(null)">All</button>
+    <ng-container *ngIf="(categories$ | async) as cats">
+      <button class="tab" *ngFor="let c of cats" (click)="setCategory(c.category_id)">
+        {{ c.category_name }}
+      </button>
+    </ng-container>
+  </div>
+
+  <!-- Items grid -->
+  <div class="grid" *ngIf="(items$ | async) as items">
+    <div class="card" *ngFor="let it of items; trackBy: trackByItem">
+      <div class="media">
+        <img
+          [src]="it.image_url || 'https://via.placeholder.com/140x140?text=F%26B'"
+          alt="{{ it.item_name }}"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="info">
+        <div class="name-row">
+          <!-- Optional veg/non-veg icon (hidden if is_veg undefined) -->
+          <span class="veg" *ngIf="it.is_veg === true" title="Veg"></span>
+          <span class="nonveg" *ngIf="it.is_veg === false" title="Non-veg"></span>
+          <h3 class="name">{{ it.item_name }}</h3>
+        </div>
+
+        <p class="desc" *ngIf="it.description as d">{{ d }}</p>
+
+        <div class="bottom">
+          <div class="price">₹{{ it.price | number: '1.0-0' }}</div>
+
+          <!-- Add / stepper -->
+          <button
+            *ngIf="qty(it) === 0; else stepper"
+            type="button"
+            class="add-btn"
+            [disabled]="!it.is_available"
+            (click)="add(it)"
+          >
+            Add
+          </button>
+          <ng-template #stepper>
+            <div class="qty">
+              <button type="button" class="qbtn" (click)="dec(it)">−</button>
+              <span class="qval">{{ qty(it) }}</span>
+              <button type="button" class="qbtn" (click)="inc(it)">+</button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty" *ngIf="items.length === 0">
+      No items found for your filters.
+    </div>
+  </div>
+</div>
+<app-booking-summary class="md:w-1/4"></app-booking-summary>
+</div>

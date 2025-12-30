@@ -1,0 +1,26 @@
+/* Summary */
+.summary { position: sticky; top: 12px; height: fit-content; }
+.summary-card {
+  background: #fff; border-radius: 14px; border: 1px solid #fee2e2;
+  box-shadow: 0 10px 30px rgba(190, 18, 60, 0.06); padding: 16px;
+}
+.summary-title { font-weight: 900; font-size: 16px; margin-bottom: 12px;  }
+.summary-movie { display: flex; gap: 12px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #fca5a5; }
+.poster-skeleton { width: 56px; height: 80px;border-radius: 6px; }
+.movie-name { font-weight: 800; font-size: 14px;  }
+.movie-meta { font-size: 12px;  }
+
+.summary-body { padding: 12px 0 0; }
+.summary-empty-icon { font-size: 40px; text-align: center; color: #fecaca; }
+.summary-empty-text { text-align: center; font-weight: 800; margin-top: 8px;  }
+.summary-empty-sub { text-align: center;  font-size: 12px; }
+
+.summary-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.summary-seat { padding: 8px 10px; border-radius: 10px; background: #fff1f2; border: 1px solid #fecaca; font-weight: 800; font-size: 13px;  }
+
+.summary-card { background:#fff; border-radius:12px; padding:12px; border:1px solid #fee2e2; }
+.summary-title { font-weight:800; margin-bottom:8px; }
+.poster-skeleton { width:56px; height:80px; border-radius:6px; background:linear-gradient(135deg,#fee2e2,#fecaca); }
+.proceed-wrap { margin-top:12px; }
+.primary-btn.proceed-btn { width:100%; padding:10px; background:#ef4444; color:#fff; border:none; border-radius:8px; font-weight:800; cursor:pointer; }
+.primary-btn.proceed-btn:disabled { opacity:.6; cursor:not-allowed; }

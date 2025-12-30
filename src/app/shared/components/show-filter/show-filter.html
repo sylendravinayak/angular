@@ -11,8 +11,8 @@
           (click)="selectDate(date)"
           class="cursor-pointer text-center px-3 py-2 rounded-xl transition-all"
           [ngClass]="{
-            'bg-pink-600 text-white': DateString(selectedDate) === date.toDateString(),
-            'text-gray-700 hover:bg-gray-100': DateString(selectedDate) !== date.toDateString()
+            'bg-pink-600 text-white': selectedDate && DateString(selectedDate) === date.toDateString(),
+            'text-gray-700 hover:bg-gray-100': !selectedDate || DateString(selectedDate) !== date.toDateString()
           }"
         >
           <div class="text-xs font-semibold">{{ date | date:'EEE' }}</div>

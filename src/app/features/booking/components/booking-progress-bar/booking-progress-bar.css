@@ -1,0 +1,16 @@
+/* Steps bar */
+.steps-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #fff1f2;            /* light red */
+  border-bottom: 1px solid #fecdd3;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.steps { display: flex; gap: 8px; font-weight: 600; font-size: 14px;  }
+.step { opacity: 0.7; }
+.step.active { color: #be123c; opacity: 1; }
+.link { background: none; border: none; color: #be123c; font-weight: 700; cursor: pointer; }
